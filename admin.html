@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Organizador - 76ª Festa de São Donato</title>
+    
+    <!-- Favicon / Ícone da Guia -->
+    <link rel="icon" type="image/jpeg" href="assets/images/logo.jpg">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- SheetJS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <!-- Firebase App & Database (Compat CDN) -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container header-container">
+            <div class="avatar-wrapper">
+                <img src="assets/images/logo.jpg" alt="São Donato" class="padroeiro-img" onerror="this.src='https://placehold.co/150x150/ffffff/6b0f1a?text=São+Donato'">
+            </div>
+            <div class="header-titles">
+                <span class="badge">Painel do Organizador</span>
+                <h1>76ª Festa de São Donato</h1>
+                <h2>Gestão e Liberação do Sorteio</h2>
+            </div>
+            <a href="index.html" target="_blank" class="btn-link-public">Ver Tela do Público ↗</a>
+        </div>
+    </header>
+
+    <main class="container main-content">
+        
+        <!-- Passo 1: Upload de Planilha -->
+        <section class="card">
+            <div class="card-header">
+                <h3>1. Base de Dados de Bilhetes</h3>
+                <p>Carregue a planilha (.xlsx ou .csv) contendo a lista de compradores.</p>
+            </div>
+            <div class="drop-zone" id="drop-zone">
+                <input type="file" id="file-input" accept=".xlsx, .xls, .csv" hidden>
+                <div class="drop-zone-content">
+                    <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    <p class="primary-text">Clique ou arraste a planilha aqui</p>
+                    <p class="secondary-text">Formatos: .xlsx, .csv (Colunas: Bilhete | Nome | Telefone)</p>
+                </div>
+            </div>
+            <div id="file-info" class="file-info hidden">
+                <span id="file-name-text"></span>
+                <button class="btn-text" id="btn-change-file">Trocar arquivo</button>
+            </div>
+        </section>
+
+        <!-- Passo 2: Cadastro de Prêmios -->
+        <section class="card disabled" id="prizes-section">
+            <div class="card-header">
+                <h3>2. Cadastrar Prêmios</h3>
+                <p>Adicione a ordem dos prêmios que serão sorteados.</p>
+            </div>
+            <div class="prize-input-group">
+                <input type="text" id="prize-name-input" placeholder="Ex: 1º Prêmio - Um Automóvel Renault Kwid Zen 0km">
+                <button id="btn-add-prize" class="btn-secondary">Adicionar Prêmio</button>
+            </div>
+            <ul id="prizes-list" class="prizes-list"></ul>
+        </section>
+
+        <!-- Passo 3: Digitação em Caixinhas e Sorteio -->
+        <section class="card disabled" id="search-section">
+            <div class="card-header">
+                <h3>3. Conferência de Bilhete</h3>
+                <p>Selecione o prêmio atual e digite os 5 dígitos do número sorteado.</p>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 20px;">
+                <label for="select-current-prize"><strong>Sorteando para o Prêmio:</strong></label>
+                <select id="select-current-prize" class="styled-select">
+                    <option value="">-- Selecione o Prêmio --</option>
+                </select>
+            </div>
+
+            <div class="input-wrapper">
+                <label>Número do Bilhete:</label>
+                
+                <div class="digit-boxes-container">
+                    <input type="text" maxlength="1" class="digit-box" data-index="0" inputmode="numeric" pattern="[0-9]*" autocomplete="off" disabled>
+                    <input type="text" maxlength="1" class="digit-box" data-index="1" inputmode="numeric" pattern="[0-9]*" autocomplete="off" disabled>
+                    <input type="text" maxlength="1" class="digit-box" data-index="2" inputmode="numeric" pattern="[0-9]*" autocomplete="off" disabled>
+                    <input type="text" maxlength="1" class="digit-box" data-index="3" inputmode="numeric" pattern="[0-9]*" autocomplete="off" disabled>
+                    <input type="text" maxlength="1" class="digit-box" data-index="4" inputmode="numeric" pattern="[0-9]*" autocomplete="off" disabled>
+                </div>
+
+                <div class="real-number-preview">
+                    <span>Número do bilhete:</span>
+                    <strong id="real-number-display">-----</strong>
+                </div>
+            </div>
+
+            <div class="counter-badge">
+                <span id="counter-text">0 / 0 números possíveis</span>
+            </div>
+
+            <button id="btn-check" class="btn-gold" disabled>Conferir / Sortear Ganhador</button>
+        </section>
+
+    </main>
+
+    <!-- Overlay da Animação e Modal de Validação -->
+    <div id="suspense-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div id="countdown-wrapper">
+                <p class="suspense-title">Conferindo bilhete...</p>
+                <div id="countdown-number" class="countdown-circle">5</div>
+            </div>
+
+            <!-- Resultado Encontrado -->
+            <div id="winner-result" class="winner-box hidden">
+                <div class="winner-badge" id="modal-prize-title">1º PRÊMIO</div>
+                <div class="winner-ticket" id="winner-ticket">#00000</div>
+                <h3 class="winner-name" id="winner-name">Nome Completo</h3>
+                <p class="winner-phone" id="winner-phone">Contato: (48) 99999-9999</p>
+                
+                <div class="modal-actions">
+                    <button id="btn-confirm-winner" class="btn-gold" style="margin-top:15px;">Confirmar e Liberar para o Público 🚀</button>
+                    <button id="btn-cancel-modal" class="btn-text" style="margin-top:12px;">Cancelar / Refazer</button>
+                </div>
+            </div>
+
+            <!-- Não Encontrado / Não Vendido -->
+            <div id="not-found-result" class="not-found-box hidden">
+                <div class="alert-icon">⚠️</div>
+                <h3 class="not-found-title">Número não vendido</h3>
+                <p class="not-found-desc">O bilhete <strong id="not-found-ticket">#00000</strong> não foi vendido ou não possui comprador na base carregada.</p>
+                <button id="btn-close-modal-nf" class="btn-primary">Tentar Outro Número</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Contato Completo do Ganhador (Exclusivo Admin) -->
+    <div id="contact-details-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="winner-badge">📋 DETALHES COMPLETOS DO COMPRADOR</div>
+            <div class="winner-ticket" id="contact-modal-ticket">#00000</div>
+            
+            <div class="contact-info-list" style="text-align: left; margin: 20px 0; background: #fdfbf7; padding: 16px; border-radius: 8px; border: 1px solid var(--border-color);">
+                <p style="margin-bottom: 8px;"><strong>Prêmio:</strong> <span id="contact-modal-prize">---</span></p>
+                <p style="margin-bottom: 8px;"><strong>Nome Completo:</strong> <span id="contact-modal-name">---</span></p>
+                <p><strong>Telefone sem Máscara:</strong> <span id="contact-modal-phone" style="color: var(--primary-burgundy); font-weight: 700;">---</span></p>
+            </div>
+
+            <button id="btn-close-contact-modal" class="btn-primary">Fechar</button>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="container footer-container">
+            <span class="footer-text">Desenvolvido por</span>
+            <a href="https://doublesstech.com.br" target="_blank" rel="noopener noreferrer" class="footer-brand-link">
+                <img src="assets/images/principal.png" alt="Double S Tech" class="footer-logo" onerror="this.src='https://placehold.co/120x40/6b0f1a/ffffff?text=Double+S+Tech'">
+            </a>
+        </div>
+    </footer>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>

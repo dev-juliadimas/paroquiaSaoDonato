@@ -1,0 +1,699 @@
+:root {
+    --primary-burgundy: #6b0f1a;
+    --primary-burgundy-dark: #4a0710;
+    --accent-gold: #d4af37;
+    --accent-gold-hover: #b89320;
+    --bg-light: #f8f6f0;
+    --card-bg: #ffffff;
+    --text-dark: #2c2c2c;
+    --text-muted: #666666;
+    --border-color: #e2d9c8;
+    --radius: 12px;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    min-height: 100vh;
+}
+
+.container { 
+    max-width: 850px; 
+    margin: 0 auto; 
+    padding: 0 20px; 
+}
+
+/* Header */
+.main-header {
+    background: linear-gradient(135deg, var(--primary-burgundy) 0%, var(--primary-burgundy-dark) 100%);
+    color: #ffffff;
+    padding: 30px 0;
+    border-bottom: 5px solid var(--accent-gold);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.header-container { 
+    display: flex; 
+    align-items: center; 
+    gap: 20px; 
+    position: relative; 
+}
+
+/* Logo Arredondado do Header */
+.avatar-wrapper { 
+    width: 90px; 
+    height: 90px; 
+    border-radius: 50%; 
+    border: 3px solid var(--accent-gold); 
+    overflow: hidden; 
+    flex-shrink: 0; 
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+}
+
+.padroeiro-img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: contain; 
+}
+
+.header-titles .badge { 
+    background-color: var(--accent-gold); 
+    color: var(--primary-burgundy-dark); 
+    font-weight: 700; 
+    font-size: 0.75rem; 
+    padding: 4px 12px; 
+    border-radius: 20px; 
+    text-transform: uppercase; 
+    display: inline-block;
+}
+
+.header-titles h1 { 
+    font-family: 'Cinzel', serif; 
+    font-size: 1.8rem; 
+    margin-top: 4px; 
+    color: #fff; 
+}
+
+.header-titles h2 { 
+    font-size: 0.95rem; 
+    opacity: 0.9; 
+    font-weight: 400;
+}
+
+.btn-link-public {
+    margin-left: auto;
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid var(--accent-gold);
+    transition: all 0.2s ease;
+}
+
+.btn-link-public:hover {
+    background: var(--accent-gold);
+    color: var(--primary-burgundy-dark);
+}
+
+/* Banner de Data, Horário e Local do Sorteio */
+.draw-info-banner {
+    background: #ffffff;
+    border: 2px solid var(--accent-gold);
+    border-radius: var(--radius);
+    padding: 16px 24px;
+    margin-top: 24px;
+    box-shadow: var(--shadow);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 15px;
+    text-align: center;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.info-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.info-value {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--primary-burgundy);
+}
+
+.info-divider {
+    width: 1px;
+    height: 35px;
+    background-color: var(--border-color);
+}
+
+/* Cards & Content */
+.main-content { 
+    margin-top: 30px; 
+    margin-bottom: 50px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 24px; 
+}
+
+.card { 
+    background: var(--card-bg); 
+    border: 1px solid var(--border-color); 
+    border-radius: var(--radius); 
+    padding: 28px; 
+    box-shadow: var(--shadow); 
+    transition: opacity 0.3s ease;
+}
+
+.card.disabled { 
+    opacity: 0.45; 
+    pointer-events: none; 
+    filter: grayscale(40%);
+}
+
+.card-header h3 { 
+    font-family: 'Cinzel', serif; 
+    color: var(--primary-burgundy); 
+    font-size: 1.25rem; 
+    margin-bottom: 4px; 
+}
+
+.card-header p { 
+    color: var(--text-muted); 
+    font-size: 0.9rem; 
+    margin-bottom: 15px; 
+}
+
+/* Drop Zone */
+.drop-zone { 
+    border: 2px dashed var(--accent-gold); 
+    border-radius: var(--radius); 
+    padding: 25px; 
+    text-align: center; 
+    background-color: #fdfbf7; 
+    cursor: pointer; 
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.drop-zone:hover {
+    background-color: #f7f2e7;
+}
+
+.upload-icon { 
+    width: 40px; 
+    height: 40px; 
+    stroke: var(--primary-burgundy); 
+    margin-bottom: 8px; 
+}
+
+.drop-zone .primary-text { 
+    font-weight: 600; 
+    color: var(--primary-burgundy); 
+}
+
+.drop-zone .secondary-text { 
+    font-size: 0.8rem; 
+    color: var(--text-muted); 
+    margin-top: 4px; 
+}
+
+.file-info { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    background-color: #f3f0e8; 
+    padding: 12px 18px; 
+    border-radius: 8px; 
+    border: 1px solid var(--border-color);
+}
+
+.file-info span {
+    font-weight: 600;
+    color: var(--primary-burgundy-dark);
+}
+
+/* Forms */
+.prize-input-group { 
+    display: flex; 
+    gap: 10px; 
+    margin-bottom: 15px; 
+}
+
+.prize-input-group input { 
+    flex: 1; 
+    padding: 12px; 
+    border: 1px solid var(--border-color); 
+    border-radius: 8px; 
+    outline: none; 
+    font-size: 0.95rem;
+}
+
+.prize-input-group input:focus {
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+}
+
+.prizes-list { 
+    list-style: none; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px; 
+}
+
+.prizes-list li { 
+    background: #fdfbf7; 
+    padding: 12px 14px; 
+    border: 1px solid var(--border-color); 
+    border-radius: 8px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    gap: 10px;
+}
+
+.styled-select { 
+    width: 100%; 
+    padding: 12px; 
+    border: 1px solid var(--border-color); 
+    border-radius: 8px; 
+    font-weight: 600; 
+    outline: none; 
+    background-color: #ffffff;
+    color: var(--text-dark);
+    font-size: 0.95rem;
+}
+
+.styled-select:focus {
+    border-color: var(--accent-gold);
+}
+
+/* Digit Boxes (5 dígitos) */
+.input-wrapper {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.input-wrapper label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    display: block;
+    margin-bottom: 8px;
+}
+
+.digit-boxes-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.digit-box {
+    width: 52px;
+    height: 62px;
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-align: center;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    background-color: #ffffff;
+    color: var(--primary-burgundy-dark);
+    outline: none;
+    transition: all 0.2s ease-in-out;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.digit-box:focus {
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
+    transform: translateY(-2px) scale(1.04);
+}
+
+.digit-box:disabled {
+    background-color: #f2efe9;
+    border-color: #d1c7b7;
+    color: #888888;
+    cursor: not-allowed;
+    opacity: 0.7;
+    box-shadow: none;
+}
+
+.real-number-preview { 
+    text-align: center; 
+    margin-top: 10px; 
+    font-size: 0.95rem; 
+    color: var(--text-muted); 
+}
+
+.real-number-preview strong { 
+    color: var(--primary-burgundy); 
+    font-size: 1.2rem; 
+    letter-spacing: 2px; 
+    font-family: monospace;
+}
+
+.counter-badge { 
+    text-align: center; 
+    background-color: #f2efe9; 
+    padding: 10px; 
+    border-radius: 8px; 
+    font-weight: 600; 
+    margin: 15px 0; 
+    color: var(--primary-burgundy-dark); 
+    border: 1px solid var(--border-color);
+}
+
+/* Buttons */
+.btn-gold { 
+    width: 100%; 
+    padding: 14px; 
+    background-color: var(--accent-gold); 
+    color: var(--primary-burgundy-dark); 
+    font-size: 1.05rem; 
+    font-weight: 800; 
+    border: none; 
+    border-radius: var(--radius); 
+    cursor: pointer; 
+    transition: background-color 0.2s, transform 0.1s; 
+    box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
+}
+
+.btn-gold:hover:not(:disabled) { 
+    background-color: var(--accent-gold-hover); 
+    transform: translateY(-1px);
+}
+
+.btn-gold:disabled { 
+    background-color: #cccccc; 
+    color: #666666; 
+    cursor: not-allowed; 
+    box-shadow: none;
+    transform: none;
+}
+
+.btn-secondary { 
+    padding: 10px 18px; 
+    background: var(--primary-burgundy); 
+    color: #ffffff; 
+    border: none; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-weight: 600; 
+    transition: background-color 0.2s;
+}
+
+.btn-secondary:hover {
+    background: var(--primary-burgundy-dark);
+}
+
+.btn-text { 
+    background: none; 
+    border: none; 
+    color: var(--primary-burgundy); 
+    font-weight: 700; 
+    cursor: pointer; 
+    text-decoration: underline; 
+    font-size: 0.9rem;
+}
+
+.btn-primary { 
+    padding: 12px 24px; 
+    background-color: var(--primary-burgundy); 
+    color: #ffffff; 
+    border: none; 
+    border-radius: var(--radius); 
+    font-weight: 600; 
+    cursor: pointer; 
+    margin-top: 15px; 
+    transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-burgundy-dark);
+}
+
+/* Public Prize Cards */
+.public-prizes-grid { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 16px; 
+    margin-top: 20px; 
+}
+
+.public-prize-card { 
+    border: 2px solid var(--border-color); 
+    border-radius: var(--radius); 
+    padding: 20px 24px; 
+    background: #ffffff; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    gap: 15px; 
+    transition: all 0.3s ease;
+}
+
+.public-prize-card.won { 
+    border-color: var(--accent-gold); 
+    background: linear-gradient(135deg, #ffffff 0%, #fdfbf3 100%); 
+    box-shadow: 0 6px 18px rgba(212, 175, 55, 0.2); 
+    transform: scale(1.01);
+}
+
+.prize-info h4 { 
+    font-family: 'Cinzel', serif; 
+    font-size: 1.2rem; 
+    color: var(--primary-burgundy); 
+}
+
+.prize-info p { 
+    color: var(--text-muted); 
+    font-size: 0.85rem; 
+    margin-top: 4px; 
+}
+
+.winner-tag { 
+    text-align: right; 
+}
+
+.winner-tag .ticket-num { 
+    font-size: 1.6rem; 
+    font-weight: 900; 
+    color: var(--primary-burgundy); 
+    font-family: monospace; 
+    letter-spacing: 1px;
+}
+
+.winner-tag .winner-full-name { 
+    font-size: 1.1rem; 
+    font-weight: 700; 
+    color: var(--text-dark); 
+    margin-top: 2px; 
+}
+
+.winner-tag .winner-phone-masked { 
+    font-size: 0.9rem; 
+    font-weight: 600; 
+    color: var(--text-muted); 
+    margin-top: 2px; 
+}
+
+.awaiting-tag { 
+    color: var(--text-muted); 
+    font-style: italic; 
+    font-size: 0.9rem; 
+}
+
+.winner-clickable-link {
+    color: var(--primary-burgundy);
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 6px;
+    padding: 4px 8px;
+    background-color: #f5eedf;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.winner-clickable-link:hover {
+    background-color: var(--accent-gold);
+    color: var(--primary-burgundy-dark);
+    border-color: var(--accent-gold-hover);
+}
+
+/* Modais */
+.modal-overlay { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0; 
+    background: rgba(0, 0, 0, 0.78); 
+    backdrop-filter: blur(5px); 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    z-index: 1000; 
+    padding: 20px; 
+}
+
+.modal-content { 
+    background: #ffffff; 
+    border-radius: 16px; 
+    padding: 35px 30px; 
+    max-width: 440px; 
+    width: 100%; 
+    text-align: center; 
+    border: 2px solid var(--accent-gold); 
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); 
+    animation: modalAppear 0.3s ease-out;
+}
+
+@keyframes modalAppear {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.suspense-title { 
+    font-size: 1.15rem; 
+    color: var(--text-muted); 
+    margin-bottom: 15px; 
+}
+
+.countdown-circle { 
+    width: 95px; 
+    height: 95px; 
+    border-radius: 50%; 
+    background: var(--primary-burgundy); 
+    color: var(--accent-gold); 
+    font-size: 3.2rem; 
+    font-weight: 900; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    margin: 0 auto; 
+    animation: pulse 1s infinite alternate; 
+    box-shadow: 0 0 20px rgba(107, 15, 26, 0.5);
+}
+
+@keyframes pulse { 
+    from { transform: scale(1); } 
+    to { transform: scale(1.08); } 
+}
+
+.winner-badge { 
+    color: var(--accent-gold-hover); 
+    font-weight: 800; 
+    letter-spacing: 1px; 
+    font-size: 0.95rem; 
+    margin-bottom: 8px; 
+    text-transform: uppercase;
+}
+
+.winner-ticket { 
+    font-size: 2.4rem; 
+    font-weight: 900; 
+    color: var(--primary-burgundy); 
+    margin-bottom: 6px; 
+    font-family: monospace;
+}
+
+.winner-name { 
+    font-size: 1.35rem; 
+    color: var(--text-dark); 
+    font-weight: 700;
+}
+
+.winner-phone { 
+    color: var(--text-muted); 
+    font-size: 1rem; 
+    margin-top: 6px; 
+}
+
+.alert-icon { 
+    font-size: 3.2rem; 
+    margin-bottom: 8px; 
+}
+
+.not-found-title { 
+    color: #d32f2f; 
+    font-size: 1.35rem; 
+    margin-bottom: 6px; 
+}
+
+.not-found-desc { 
+    color: var(--text-muted); 
+    font-size: 0.95rem;
+}
+
+/* Footer / Assinatura Double S Tech */
+.main-footer {
+    padding: 25px 0 35px 0;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    margin-top: 40px;
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.footer-text {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.footer-brand-link {
+    display: inline-block;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.footer-brand-link:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+.footer-logo {
+    max-height: 38px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+.hidden { 
+    display: none !important; 
+}
+
+@media (max-width: 600px) {
+    .header-container { flex-direction: column; text-align: center; }
+    .btn-link-public { margin: 10px auto 0 auto; }
+    .public-prize-card { flex-direction: column; text-align: center; }
+    .winner-tag { text-align: center; }
+    .digit-boxes-container { gap: 6px; }
+    .digit-box { width: 42px; height: 52px; font-size: 1.4rem; }
+    .prize-input-group { flex-direction: column; }
+    .modal-content { padding: 25px 20px; }
+    
+    .draw-info-banner {
+        flex-direction: column;
+        gap: 12px;
+        padding: 18px 15px;
+    }
+
+    .info-divider {
+        width: 80%;
+        height: 1px;
+    }
+}
