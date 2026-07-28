@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ganhadores - 76ª Festa de São Donato</title>
+    
+    <!-- Favicon / Ícone da Guia -->
+    <link rel="icon" type="image/jpeg" href="./assets/images/logo.jpg">
+
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <!-- Firebase App & Database (Compat CDN) -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container header-container">
+            <div class="avatar-wrapper">
+                <img src="./assets/images/logo.jpg" alt="São Donato" class="padroeiro-img" onerror="this.src='https://placehold.co/150x150/ffffff/6b0f1a?text=São+Donato'">
+            </div>
+            <div class="header-titles">
+                <span class="badge">Resultado Oficial em Tempo Real</span>
+                <h1>76ª Festa de São Donato</h1>
+                <h2>Paróquia São Donato — Içara, SC</h2>
+            </div>
+        </div>
+    </header>
+
+    <!-- Banner com Data, Horário e Local do Sorteio -->
+    <div class="container">
+        <div class="draw-info-banner">
+            <div class="info-item">
+                <span class="info-label">📅 DIA DO SORTEIO</span>
+                <span class="info-value">09/08/2026</span>
+            </div>
+            <div class="info-divider"></div>
+            <div class="info-item">
+                <span class="info-label">⏰ HORÁRIO</span>
+                <span class="info-value">21:00h</span>
+            </div>
+            <div class="info-divider"></div>
+            <div class="info-item">
+                <span class="info-label">📍 LOCAL</span>
+                <span class="info-value">Praça da Matriz São Donato</span>
+            </div>
+        </div>
+    </div>
+
+    <main class="container main-content">
+        <section class="card">
+            <div class="card-header" style="text-align: center;">
+                <h3 style="font-size: 1.6rem;">🎉 Lista de Ganhadores do Sorteio 🎉</h3>
+                <p>Acompanhe abaixo os prêmios e os números sorteados em tempo real.</p>
+            </div>
+
+            <div id="public-prizes-container" class="public-prizes-grid">
+                <!-- Preenchido via JavaScript em Tempo Real -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container footer-container">
+            <span class="footer-text">Desenvolvido por</span>
+            <a href="https://doublesstech.com.br" target="_blank" rel="noopener noreferrer" class="footer-brand-link">
+                <img src="./assets/images/principal.png" alt="Double S Tech" class="footer-logo" onerror="this.src='https://placehold.co/120x40/6b0f1a/ffffff?text=Double+S+Tech'">
+            </a>
+        </div>
+    </footer>
+
+    <script src="./js/app.js"></script>
+</body>
+</html>
